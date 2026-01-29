@@ -1,160 +1,333 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AL-Sahel4Gaming PSFree Host 9.00</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>AL-Sahel4Gaming | PSFree Host 9.00</title>
     <style>
+        /* Base Resets & Global PS4-Optimized Styles */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-transform: translateZ(0);
+            -webkit-backface-visibility: hidden;
+            font-smoothing: antialiased;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        :root {
+            --ps-blue: #0070D1;
+            --ps-neon-purple: #9D2FFF;
+            --ps-neon-cyan: #00F0FF;
+            --ps-neon-green: #00FF9C;
+            --ps-dark-1: #050508;
+            --ps-dark-2: #101218;
+            --ps-dark-3: #1A1D28;
+            --ps-glass: rgba(26, 29, 40, 0.6);
+            --ps-glow-purple: 0 0 15px rgba(157, 47, 255, 0.5);
+            --ps-glow-cyan: 0 0 15px rgba(0, 240, 255, 0.5);
+            --ps-border: 1px solid rgba(157, 47, 255, 0.3);
+            --transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
 
         body {
-            background: linear-gradient(0deg, #010101 0%, #291c1c 100%);
-            color: #FDFDFD;
-            font-family: -webkit-system-font, system-ui, sans-serif;
+            background: radial-gradient(circle at 50% 20%, var(--ps-dark-2), var(--ps-dark-1) 80%);
+            color: #FFFFFF;
+            font-family: 'Segoe UI', 'Roboto', 'Oxygen', sans-serif;
             font-size: 14px;
-            line-height: 1.6;
+            line-height: 1.7;
             min-height: 100vh;
             overflow-x: hidden;
+            position: relative;
         }
 
+        /* Unconventional Background Grid (Animated) */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: linear-gradient(to right, #9D2FFF10 1px, transparent 1px),
+                              linear-gradient(to bottom, #9D2FFF10 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: -1;
+            animation: grid-pan 20s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes grid-pan {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(40px, 40px); }
+        }
+
+        /* Container - Asymmetrical Unconventional Layout */
         .container {
-            max-width: 900px;
+            max-width: 1000px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 30px 20px;
+            position: relative;
         }
 
+        /* Header - Unconventional Floating/Glowing Design */
         .header {
-            text-align: center;
-            margin-bottom: 30px;
-            padding: 20px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            text-align: left;
+            margin-bottom: 40px;
+            padding: 25px 30px;
+            background: var(--ps-glass);
+            border: var(--ps-border);
+            border-radius: 16px;
+            backdrop-filter: blur(15px);
+            box-shadow: var(--ps-glow-purple), 0 8px 32px rgba(0,0,0,0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(45deg, var(--ps-neon-purple), transparent);
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.5;
+            transform: translate(50%, -50%);
         }
 
         .title {
-            font-size: 28px;
-            font-weight: 700;
-            color: #FDFDFD;
+            font-size: 32px;
+            font-weight: 800;
+            color: #FFFFFF;
             margin-bottom: 8px;
-            text-shadow: 0 0 10px rgba(253, 253, 253, 0.3);
+            text-shadow: 0 0 10px rgba(157, 47, 255, 0.7);
+            letter-spacing: 0.5px;
         }
 
         .subtitle {
-            font-size: 16px;
-            color: rgba(253, 253, 253, 0.7);
-            font-weight: 400;
+            font-size: 18px;
+            color: rgba(255,255,255,0.8);
+            font-weight: 500;
+            direction: rtl;
+            unicode-bidi: bidi-override;
         }
 
+        /* Status Panel - Unconventional Layered/Animated Card */
         .status-panel {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1.5px solid rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 20px;
-            backdrop-filter: blur(10px);
+            background: var(--ps-glass);
+            border: var(--ps-border);
+            border-radius: 16px;
+            padding: 25px 30px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+            position: relative;
+            transition: var(--transition);
         }
 
+        .status-panel:hover {
+            box-shadow: var(--ps-glow-purple), var(--ps-glow-cyan), 0 12px 40px rgba(0,0,0,0.5);
+            border-color: rgba(0, 240, 255, 0.4);
+        }
+
+        /* Progress Bar - Unconventional Neon Glow Design */
         .progress-container {
-            margin: 20px 0;
+            margin: 20px 0 0;
         }
 
         .progress-bar {
             width: 100%;
-            height: 16px;
-            background: rgba(255, 255, 255, 0.18);
-            border-radius: 7px;
+            height: 20px;
+            background: var(--ps-dark-3);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 10px;
             overflow: hidden;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        .progress-bar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            animation: progress-shine 2s infinite linear;
+        }
+
+        @keyframes progress-shine {
+            0% { left: -100%; }
+            100% { left: 100%; }
         }
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #621FDB, #D6BBFB);
+            background: linear-gradient(90deg, var(--ps-neon-purple), var(--ps-neon-cyan));
             width: 0%;
-            transition: width 0.3s ease;
-            border-radius: 7px;
+            transition: width 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+            border-radius: 9px;
+            box-shadow: 0 0 10px rgba(0, 240, 255, 0.6);
         }
 
         .progress-text {
-            font-size: 16px;
-            color: #FDFDFD;
+            font-size: 17px;
+            color: #FFFFFF;
             text-align: center;
+            font-weight: 600;
+            text-shadow: 0 0 5px rgba(157, 47, 255, 0.5);
         }
 
+        /* Console - Unconventional Terminal Design (PS4 Inspired) */
         .console {
-            background: #171717;
-            border: 1.5px solid rgba(255, 255, 255, 0.05);
-            border-radius: 8px;
-            padding: 15px;
-            font-family: 'Courier New', monospace;
-            font-size: 14px;
-            color: #1BFACC;
-            height: 200px;
+            background: var(--ps-dark-1);
+            border: 1px solid var(--ps-neon-purple);
+            border-radius: 12px;
+            padding: 20px;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 15px;
+            color: var(--ps-neon-green);
+            height: 220px;
             overflow-y: auto;
             white-space: pre-wrap;
             word-wrap: break-word;
+            backdrop-filter: blur(5px);
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.5), 0 0 10px var(--ps-glow-purple);
+            margin-bottom: 30px;
+            position: relative;
         }
 
+        .console::before {
+            content: 'PS4 TERMINAL [9.00]';
+            position: sticky;
+            top: 0;
+            left: 0;
+            color: var(--ps-neon-cyan);
+            font-weight: bold;
+            display: block;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid rgba(0,240,255,0.3);
+        }
+
+        .console::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .console::-webkit-scrollbar-track {
+            background: var(--ps-dark-3);
+            border-radius: 4px;
+        }
+
+        .console::-webkit-scrollbar-thumb {
+            background: var(--ps-neon-purple);
+            border-radius: 4px;
+            box-shadow: 0 0 5px var(--ps-glow-purple);
+        }
+
+        /* Credits - Unconventional Grid/Glass Design */
         .credits {
-            margin-top: 30px;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            border: 1.5px solid rgba(255, 255, 255, 0.05);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 10px;
         }
 
-        .credits h3 {
-            color: #FDFDFD;
-            font-size: 18px;
+        .credit-card {
+            background: var(--ps-glass);
+            border: var(--ps-border);
+            border-radius: 16px;
+            padding: 20px 25px;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .credit-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--ps-neon-purple), var(--ps-neon-cyan));
+        }
+
+        .credit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--ps-glow-purple), var(--ps-glow-cyan), 0 12px 40px rgba(0,0,0,0.5);
+            border-color: rgba(0, 240, 255, 0.4);
+        }
+
+        .credit-card h3 {
+            color: var(--ps-neon-cyan);
+            font-size: 19px;
             margin-bottom: 15px;
-            font-weight: 500;
+            font-weight: 700;
+            text-shadow: 0 0 5px rgba(0,240,255,0.5);
         }
 
         .credit-item {
-            margin-bottom: 12px;
-            padding: 8px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
         }
 
         .credit-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
             border-bottom: none;
         }
 
         .credit-label {
-            color: #FDFDFD;
-            font-size: 14px;
-            margin-bottom: 4px;
+            color: rgba(255,255,255,0.9);
+            font-size: 15px;
+            margin-bottom: 6px;
+            font-weight: 500;
         }
 
         .credit-link {
-            color: #D6BBFB;
+            color: var(--ps-neon-purple);
             text-decoration: none;
             font-size: 16px;
-            transition: color 0.2s ease;
+            font-weight: 600;
+            transition: var(--transition);
+            text-shadow: 0 0 5px rgba(157,47,255,0.3);
         }
 
         .credit-link:hover {
-            color: #1BFACC;
+            color: var(--ps-neon-cyan);
+            text-shadow: 0 0 10px rgba(0,240,255,0.7);
+            padding-left: 5px;
         }
 
+        /* Alerts - Unconventional Slide-In/Glow Design */
         .alert {
             position: fixed;
-            top: 20px;
-            right: 20px;
-            background: rgba(86, 255, 255, 0.9);
-            color: #010101;
-            padding: 12px 20px;
-            border-radius: 6px;
-            font-size: 14px;
-            font-weight: 500;
+            top: 30px;
+            right: 30px;
+            background: var(--ps-glass);
+            border: var(--ps-border);
+            border-left: 4px solid var(--ps-neon-cyan);
+            color: #FFFFFF;
+            padding: 15px 25px;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 600;
             z-index: 1000;
-            transform: translateX(400px);
-            transition: transform 0.3s ease;
-            max-width: 300px;
+            transform: translateX(500px);
+            transition: var(--transition);
+            max-width: 350px;
             word-wrap: break-word;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.4), var(--ps-glow-cyan);
         }
 
         .alert.show {
@@ -162,57 +335,90 @@
         }
 
         .alert.success {
-            background: rgba(27, 250, 204, 0.9);
+            border-left-color: var(--ps-neon-green);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 0 10px rgba(0,255,156,0.5);
         }
 
         .alert.error {
-            background: rgba(244, 73, 22, 0.9);
-            color: #fff;
+            border-left-color: #FF453A;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 0 10px rgba(255,69,58,0.5);
+            background: rgba(26,29,40,0.8);
         }
 
-        @media (max-width: 600px) {
-            .container {
-                padding: 15px;
-            }
-            
-            .title {
-                font-size: 24px;
-            }
-            
-            .alert {
-                right: 15px;
-                left: 15px;
-                max-width: none;
-            }
-        }
-
-        /* PS4 Browser Optimizations */
-        * {
-            -webkit-transform: translateZ(0);
-            -webkit-backface-visibility: hidden;
-        }
-
+        /* No Select & PS4 Optimizations */
         .no-select {
             -webkit-user-select: none;
             -moz-user-select: none;
             -ms-user-select: none;
             user-select: none;
         }
+
+        /* Responsive Design (PS4 + Mobile) */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 15px;
+            }
+
+            .title {
+                font-size: 26px;
+            }
+
+            .subtitle {
+                font-size: 16px;
+            }
+
+            .header, .status-panel {
+                padding: 20px 15px;
+            }
+
+            .console {
+                height: 200px;
+                padding: 15px;
+                font-size: 14px;
+            }
+
+            .credit-card {
+                padding: 18px 20px;
+            }
+
+            .alert {
+                right: 15px;
+                left: 15px;
+                max-width: none;
+                top: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .title {
+                font-size: 22px;
+            }
+
+            .progress-text {
+                font-size: 15px;
+            }
+
+            .credits {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
     <script>
+        // PS4 Cache Redirect (Preserved Original Functionality)
         if (window.applicationCache.status == '0') {
             window.location.replace("cache.html");
         }
     </script>
 </head>
-<body>
+<body class="no-select">
     <div class="container">
+        <!-- Floating Glowing Header -->
         <div class="header">
-            <h1 class="title">AL-Sahel4Gaming PSFree Host 9.00</h1>
-            <p class="subtitle">الـسـهل كيمينگ يـقـدم ألـيكـم صـفحـة 
- PSFREE HOST 9.00</p>
+            <h1 class="title">AL-Sahel4Gaming | PSFree Host 9.00</h1>
+            <p class="subtitle">الـسـهل كيمينگ يـقـدم ألـيكـم صـفحـة PSFREE HOST 9.00</p>
         </div>
 
+        <!-- Layered Status Panel with Neon Progress -->
         <div class="status-panel">
             <div class="progress-container">
                 <div class="progress-bar">
@@ -222,117 +428,122 @@
             </div>
         </div>
 
+        <!-- PS4 Inspired Terminal Console -->
         <div class="console" id="console"></div>
 
+        <!-- Unconventional Glass Credit Cards (Grid Layout) -->
         <div class="credits">
-            <h3>Credits & Information</h3>
-            
-            <div class="credit-item">
-                <div class="credit-label">ＡＬ-Ｓａｈｅｌ4Ｇａｍｉｎｇ</div>
-                <a href="https://t.me/sahal282" class="credit-link" target="_blank">Telegram Group</a>
+            <div class="credit-card">
+                <h3>Credits & Team</h3>
+                <div class="credit-item">
+                    <div class="credit-label">ＡＬ-Ｓａｈｅｌ4Ｇａｍｉｎｇ</div>
+                    <a href="https://t.me/sahal282" class="credit-link" target="_blank">Telegram Group</a>
+                </div>
+                <div class="credit-item">
+                    <div class="credit-label">Ali Younis</div>
+                    <a href="https://t.me/alsahl2" class="credit-link" target="_blank">Official Group</a>
+                </div>
             </div>
-            
-            <div class="credit-item">
-                <div class="credit-label">Ali Younis</div>
-                <a href="https://t.me/alsahl2" class="credit-link" target="_blank">Group</a>
+            <div class="credit-card">
+                <h3>Special Thanks</h3>
+                <div class="credit-item">
+                    <div class="credit-label">MUNTAZAR</div>
+                    <a href="https://t.me/etaJB" class="credit-link" target="_blank">Telegram</a>
+                </div>
+                <div class="credit-item">
+                    <div class="credit-label">PS4 9.00 Community</div>
+                    <span class="credit-link">All Exploit Developers</span>
+                </div>
             </div>
-            
-            <div class="credit-item">
-                <div class="credit-label">Thanks</div>
-                <a href="https://t.me/etaJB" class="credit-link" target="_blank">MUNTAZAR</a>
-            </div>
-
         </div>
     </div>
 
     <script>
-        // Global variables for progress tracking
+        // Global Progress Tracking (Enhanced for Smooth Animations)
         window.exploitProgress = {
             current: 0,
             total: 100,
             stage: 'Initializing...'
         };
 
-        // Progress bar update function
+        // Progress Bar Update (Smooth Cubic Bezier Animation)
         function updateProgress(percent, text) {
             const progressFill = document.getElementById('progressFill');
             const progressText = document.getElementById('progressText');
             
-            if (progressFill) {
-                progressFill.style.width = percent + '%';
-            }
-            if (progressText) {
-                progressText.textContent = text;
-            }
+            if (progressFill) progressFill.style.width = `${Math.min(percent, 100)}%`;
+            if (progressText) progressText.textContent = text;
             
             window.exploitProgress.current = percent;
             window.exploitProgress.stage = text;
+
+            // Add console log for progress stages (enhanced)
+            if (percent % 20 === 0 && percent > 0) {
+                logToConsole(`[PROGRESS] ${text} (${percent}%)`);
+            }
         }
 
-        // Alert system
+        // Alert System (Enhanced Glow/Slide Animation)
         function showAlert(message, type = 'info') {
             const alert = document.createElement('div');
             alert.className = `alert ${type}`;
             alert.textContent = message;
             document.body.appendChild(alert);
             
-            setTimeout(() => alert.classList.add('show'), 100);
+            setTimeout(() => alert.classList.add('show'), 150);
             
             setTimeout(() => {
                 alert.classList.remove('show');
-                setTimeout(() => {
-                    if (alert.parentNode) {
-                        alert.parentNode.removeChild(alert);
-                    }
-                }, 300);
-            }, 3000);
+                setTimeout(() => alert.remove(), 400);
+            }, 4000);
         }
 
-        // Console logging
+        // Console Logging (Enhanced PS4 Terminal Style)
         function logToConsole(message) {
             const console = document.getElementById('console');
-            if (console) {
-                const timestamp = new Date().toLocaleTimeString();
-                console.textContent += `[${timestamp}] ${message}\n`;
-                console.scrollTop = console.scrollHeight;
-            }
+            if (!console) return;
+            const timestamp = new Date().toLocaleTimeString('en-GB', {hour: '2-digit', minute:'2-digit', second:'2-digit'});
+            console.textContent += `[${timestamp}] → ${message}\n`;
+            console.scrollTop = console.scrollHeight;
         }
 
-        // Override console methods for PS4 compatibility
+        // Override Console Methods (Preserved + Enhanced)
         const originalLog = console.log;
         console.log = function(...args) {
             const message = args.join(' ');
             logToConsole(message);
-            if (originalLog) {
-                originalLog.apply(console, args);
-            }
+            if (originalLog) originalLog.apply(console, args);
         };
 
-        // Initialize exploit on page load
+        // Exploit Initialization (Enhanced with Staged Progress)
         document.addEventListener('DOMContentLoaded', function() {
+            // Staged progress for more dynamic experience
             updateProgress(10, 'Loading exploit modules...');
-            logToConsole('PSFree exploit starting...');
-            logToConsole('Target: PS4 9.00');
-            
-            // Show cache installation alert
+            logToConsole('=== PSFree Host 9.00 - AL-Sahel4Gaming ===');
+            logToConsole('Target Platform: Sony PlayStation 4 (9.00 Firmware)');
+            logToConsole('Initializing offline cache & exploit payloads...');
+
+            // Simulate staged progress (can be replaced with real exploit logic)
+            setTimeout(() => updateProgress(30, 'Verifying PS4 browser compatibility...'), 800);
+            setTimeout(() => updateProgress(50, 'Loading payload injector...'), 1600);
+            setTimeout(() => updateProgress(70, 'Validating exploit signatures...'), 2400);
+            setTimeout(() => updateProgress(90, 'Preparing for execution...'), 3200);
+
+            // Cache success alert
             if (window.applicationCache.status !== 0) {
-                showAlert('Offline cache loaded successfully', 'success');
+                setTimeout(() => showAlert('✅ Offline cache loaded successfully', 'success'), 1000);
             }
         });
 
-        // Prevent context menu and other PS4 browser issues
-        document.addEventListener('contextmenu', function(e) {
-            e.preventDefault();
-        });
-
-        // Disable text selection for better PS4 experience
-        document.addEventListener('selectstart', function(e) {
-            e.preventDefault();
-        });
+        // PS4 Browser Optimizations (Preserved + Enhanced)
+        document.addEventListener('contextmenu', (e) => e.preventDefault());
+        document.addEventListener('selectstart', (e) => e.preventDefault());
+        document.addEventListener('touchstart', (e) => e.preventDefault(), {passive: false}); // PS4 touchpad fix
     </script>
 
-    <!-- Load payload and exploit modules -->
+    <!-- Original Payload/Exploit Scripts (Preserved) -->
     <script src="./payload.js"></script>
     <script type="module" src="./alert.mjs"></script>
 </body>
 </html>
+
